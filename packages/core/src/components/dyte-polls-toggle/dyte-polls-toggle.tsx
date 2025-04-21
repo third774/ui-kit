@@ -109,6 +109,16 @@ export class DytePollsToggle {
     this.canViewPolls = canViewPolls(this.meeting);
   };
 
+  @Watch('pollsActive')
+  handlePollsActiveChange() {
+    // Polls sidebar closed without opening a different sidebar
+    if (!this.pollsActive && !this.states.activeSidebar) {
+      this.buttonEl.focus();
+    }
+  }
+
+  private buttonEl: HTMLDyteControlbarButtonElement;
+
   render() {
     if (!this.canViewPolls) return <Host data-hidden />;
     const text = this.t('polls');
@@ -123,6 +133,7 @@ export class DytePollsToggle {
           </div>
         )}
         <dyte-controlbar-button
+          ref={(el) => (this.buttonEl = el)}
           part="controlbar-button"
           size={this.size}
           iconPack={this.iconPack}

@@ -16,7 +16,7 @@ export type ButtonKind = 'button' | 'icon' | 'wide';
 @Component({
   tag: 'dyte-button',
   styleUrl: 'dyte-button.css',
-  shadow: true,
+  shadow: { delegatesFocus: true },
 })
 export class DyteButton {
   /** Size */

@@ -95,6 +95,16 @@ export class DytePluginsToggle {
     this.canViewPlugins = canViewPlugins(this.meeting);
   };
 
+  @Watch('pluginsActive')
+  handlePluginsActiveChange() {
+    // Plugins sidebar closed without opening a different sidebar
+    if (!this.pluginsActive && !this.states.activeSidebar) {
+      this.buttonEl.focus();
+    }
+  }
+
+  private buttonEl: HTMLDyteControlbarButtonElement;
+
   render() {
     if (!this.canViewPlugins) return <Host data-hidden />;
 
@@ -103,6 +113,7 @@ export class DytePluginsToggle {
     return (
       <Host title={text}>
         <dyte-controlbar-button
+          ref={(el) => (this.buttonEl = el)}
           part="controlbar-button"
           size={this.size}
           iconPack={this.iconPack}

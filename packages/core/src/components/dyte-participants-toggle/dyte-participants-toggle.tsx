@@ -162,6 +162,16 @@ export class DyteParticipantsToggle {
     this.canViewParticipants = canViewParticipants(this.meeting);
   };
 
+  @Watch('participantsActive')
+  handleParticipantsActiveChange() {
+    // Participants sidebar closed without opening a different sidebar
+    if (!this.participantsActive && !this.states.activeSidebar) {
+      this.buttonEl.focus();
+    }
+  }
+
+  private buttonEl: HTMLDyteControlbarButtonElement;
+
   render() {
     if (!this.canViewParticipants) return <Host data-hidden />;
     const text = this.t('participants');
@@ -174,6 +184,7 @@ export class DyteParticipantsToggle {
           </div>
         )}
         <dyte-controlbar-button
+          ref={(el) => (this.buttonEl = el)}
           part="controlbar-button"
           size={this.size}
           iconPack={this.iconPack}

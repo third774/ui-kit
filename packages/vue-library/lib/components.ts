@@ -1432,6 +1432,7 @@ export const DyteSidebarUi = /*@__PURE__*/ defineContainer<JSX.DyteSidebarUi>('d
   'hideCloseAction',
   'currentTab',
   'iconPack',
+  'focusCloseButton',
   't',
   'tabChange',
   'sidebarClose'
